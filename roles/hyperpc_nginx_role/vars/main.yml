@@ -1,0 +1,4 @@
+---
+# vars file for hyperpc_nginx_role
+hyperpc_nginx_role_config_path: "/etc/nginx/conf.d/proxy.conf"
+hyperpc_nginx_role_server_name: "nginx.hyperpc.ru"

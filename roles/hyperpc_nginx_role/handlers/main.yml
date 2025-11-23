@@ -1,0 +1,14 @@
+---
+# handlers file for hyperpc-nginx-role
+- name: Validate_nginx_config
+  listen: "reload nginx safely"
+  ansible.builtin.command: nginx -t
+  register: nginx_test
+  changed_when: false
+  failed_when: nginx_test.rc != 0
+
+- name: Reload_nginx
+  listen: "reload nginx safely"
+  ansible.builtin.service:
+    name: nginx
+    state: reloaded

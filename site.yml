@@ -1,0 +1,7 @@
+---
+- name: Configure_Nginx_proxy
+- hosts: webservers
+  become: true
+
+  roles:
+    - role: hyperpc_nginx_role

@@ -1,0 +1,6 @@
+---
+- name: tests
+- hosts: localhost
+  remote_user: root
+  roles:
+    - hyperpc_nginx_role
