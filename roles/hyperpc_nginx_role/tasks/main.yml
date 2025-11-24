@@ -2,7 +2,7 @@
 # tasks file for hyperpc-nginx-role
 - name: Ensure_nginx_config_directory_exists
   ansible.builtin.file:
-    path: "{{ nginx_config_path | dirname }}"
+    path: "{{ hyperpc_nginx_role_config_path | dirname }}"
     state: directory
     mode: "0755"
 
@@ -11,10 +11,10 @@
     path: "{{ hyperpc_nginx_role_config_path }}"
   register: hyperpc_nginx_role_nginx_conf_stat
 
-- name: Backup existing nginx config
+- name: Backup_existing_nginx_config
   ansible.builtin.copy:
-    src: "{{ nginx_config_path }}"
-    dest: "{{ nginx_config_path }}.bak"
+    src: "{{ hyperpc_nginx_role_config_path }}"
+    dest: "{{ hyperpc_nginx_role_config_path }}.bak"
     remote_src: true
     owner: root
     group: root
@@ -24,7 +24,7 @@
 - name: Create_nginx_proxy_config
   ansible.builtin.template:
     src: nginx.conf.j2
-    dest: "{{ nginx_config_path }}"
+    dest: "{{ hyperpc_nginx_role_config_path }}"
     owner: root
     group: root
     mode: "0644"
