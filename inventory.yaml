@@ -1,8 +1,16 @@
-all:
-  children:
-    webservers:
-      hosts:
-        web1:
-          ansible_host: 192.168.1.100
-        web2:
-          ansible_host: 192.168.1.101
+  all:
+    vars:
+      ansible_ssh_user: service
+      ansible_ssh_common_args: "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+    children:
+      stage:
+        hosts:
+          web1:
+            ansible_ssh_host: 192.168.1.1
+      production:
+        vars: 
+          ansible_ssh_user: manager
+        hosts:
+          prod_web_1:
+            ansible_host: 192.168.1.12
+        
