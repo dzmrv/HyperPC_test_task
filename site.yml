@@ -1,6 +1,6 @@
 ---
 - name: Configure_Nginx_proxy
-  hosts: webservers
+  hosts: stage
   become: true
 
   roles:

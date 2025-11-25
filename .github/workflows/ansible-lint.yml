@@ -1,4 +1,4 @@
-name: Ansible_Lint
+name: Ansible_lint_and_deploy
 
 on:
   push:
@@ -28,3 +28,31 @@ jobs:
       - name: Run_ansible-lint
         run: |
           ansible-lint roles/hyperpc_nginx_role
+
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    needs: lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install ansible
+        run: |
+          pip install --upgrade pip
+          pip install ansible ansible-lint
+
+      - name: Save SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+
+      - name: Run Ansible
+        run: ansible-playbook -i inventory.yaml site.yml
