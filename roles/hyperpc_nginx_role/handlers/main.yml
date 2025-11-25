@@ -3,9 +3,9 @@
 - name: Validate_nginx_config
   listen: "reload nginx safely"
   ansible.builtin.command: nginx -t
-  register: nginx_test
+  register: hyperpc_nginx_role_nginx_test
   changed_when: false
-  failed_when: nginx_test.rc != 0
+  failed_when: hyperpc_nginx_role_nginx_test.rc != 0
 
 - name: Reload_nginx
   listen: "reload nginx safely"
