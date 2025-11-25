@@ -6,7 +6,7 @@ all:
     stage:
       hosts:
         web1:
-          ansible_ssh_host: 192.168.1.1
+          ansible_ssh_host: 151.245.216.141
     production:
       vars:
         ansible_ssh_user: manager
